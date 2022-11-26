@@ -1,0 +1,221 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.but{
+    width: 200px;
+    height: 200px;
+    margin: 200px auto;
+    background-color: white;
+}
+
+img {
+    max-width:100%;
+    height:auto;
+}
+
+@keyframes bannermove {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(-50%, 0); /* The image width */
+    }
+  }
+
+.map{
+    height: 260px;
+    width: 300%;
+    background: url("src/imgs/backgroundCity.png") repeat-x;
+    background-size: contain;
+    margin-bottom: 20px;
+    border-radius: 7px;
+    -webkit-filter: drop-shadow(0px 5px 10px rgb(49, 14, 91));
+    filter        : drop-shadow(0px 5px 10px rgb(8, 5, 47));
+    animation: bannermove 3s linear infinite;
+    z-index: -1;
+}
+
+.container{
+    width: 1400px;
+    padding: 0 30px;
+}
+
+.questions{
+    border-radius: 7px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    -webkit-filter: drop-shadow(0px 5px 10px rgb(29, 7, 55));
+    filter        : drop-shadow(0px 5px 10px rgb(27, 4, 63));
+    font-family: 'Pixel Cyr Normal', arial;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    text-shadow:1px 1px 10px #fff, 1px 1px 7px #ccc;
+}
+
+.option{
+    border-radius: 9px;
+    display: inline-block;
+    width: 185px;
+    height: 440px;
+    background-color: #202530;
+    background-image: url('src/imgs/optionBg.png');
+    background-size:cover;
+    filter: blur(0px);
+}
+
+.option2{
+    border-radius: 9px;
+    display: inline-block;
+    width: 185px;
+    height: 440px;
+    background-color: #202530;
+    background-image: url('src/imgs/optionBgReversed.png');
+    background-size:cover;
+    filter: blur(0px);
+}
+
+.questionbox , .answers{
+    border-radius: 5px;
+    width: 450px;
+    height: 440px;
+    background-color: #2d384b;
+    background-size: cover;
+    -webkit-filter: drop-shadow(0px 5px 10px rgb(49, 14, 91));
+    filter        : drop-shadow(0px 5px 10px rgb(33, 3, 67));
+}
+
+.question{
+    border-radius: 6px;
+    display: block;  
+    height: 150px;
+    width: 420px;
+    margin: 13px 15px;
+    background-color: #536482;
+    /* Internet Explorer 10 */
+    display: -ms-flexbox;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+
+    /* Firefox */
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    /* Safari, Opera, and Chrome */
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    /* W3C */
+    display: box;
+    box-pack: center;
+    box-align: center;
+}
+
+.image{
+    border-radius: 6px;
+    display: block;  
+    height: 234px;
+    width: 420px;
+    margin: 13px 15px;
+    background-color: #536482;
+}
+
+.answer{
+    border-radius: 4px;
+    width: 420px;
+    height: 90px;
+    margin: 13px 15px;
+    background-color: #536482;
+    /* Internet Explorer 10 */
+    display: -ms-flexbox;
+    -ms-flex-pack: center;
+    -ms-flex-align: center;
+
+    /* Firefox */
+    display: -moz-box;
+    -moz-box-pack: center;
+    -moz-box-align: center;
+
+    /* Safari, Opera, and Chrome */
+    display: -webkit-box;
+    -webkit-box-pack: center;
+    -webkit-box-align: center;
+
+    /* W3C */
+    display: box;
+    box-pack: center;
+    box-align: center;
+
+    cursor: pointer;
+}
+
+.backgroundcolor {
+    background-color: #0c1428;
+}
+
+@keyframes roam {
+    from {
+        transform: translate(0, 0) scale(1);;
+    }
+    50% {
+        transform: translate(-10%, +35%) scale(1.2);
+    }
+    to {
+        transform: translate(+10%, 0%) scale(1);
+    }
+    to {
+        transform: translate(0, 0%) scale(1);
+    }
+}
+
+
+#image {
+    height: 105px;
+    width: 243px;
+    background: 
+    url('src/imgs/carGif.gif') 0px 0px;
+    background-size: cover;
+    position: absolute;
+    z-index: 4;
+    top: 88px;
+    left: 800px;
+    -webkit-filter: drop-shadow(0px -15px 20px rgb(124, 30, 187));
+    filter        : drop-shadow(0px -15px 20px rgb(107, 7, 194)) brightness(60%) blur(0);
+    -ms-filter    : "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=2, Color='#444')";
+    filter        : "progid:DXImageTransform.Microsoft.Dropshadow(OffX=0, OffY=2, Color='#444')";
+    animation : roam 5s infinite;
+}
+
+.buttons{
+    position:absolute;
+    float: left;
+    margin-top: 0px;
+    z-index: 20;
+}
+#icon{
+    width: 50%;
+    cursor: pointer;
+    margin-left: 0%;
+    margin-top: 25%;
+}
+
+#icon2{
+    margin-left: 0%;
+    margin-top: 25%;
+    width: 50%;
+    cursor: pointer;
+    z-index: 20;
+}
+
+body {
+    overflow: hidden; /* Hide scrollbars */
+}
+
+#q_img {
+    border-radius: 4px;
+}
