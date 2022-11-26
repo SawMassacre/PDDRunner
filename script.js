@@ -132,11 +132,13 @@ function takeDamage() {
 
 function damageAnimation() {
     if (damage == 0) {
+        soundMaker(1);
         document.getElementById('image').style.left = damage1 + 'px';
         document.getElementById('image').style.background = "url('src/imgs/carGifDamagedOnce.gif')";
         document.getElementById('image').style.backgroundSize = "cover";
         document.getElementById('image').style.filter = "invert(10%) drop-shadow(0px -15px 20px rgb(255, 165, 40))";
     } else if (damage == 1) {
+        soundMaker(1);
         document.getElementById('image').style.left = damage2 + 'px';
         document.getElementById('image').style.background = "url('src/imgs/carGifDamagedTwice.gif')";
         document.getElementById('image').style.backgroundSize = "cover";
@@ -145,5 +147,25 @@ function damageAnimation() {
 }
 
 function gameOver() {
+    soundMaker(2);
     alert('game over! study harder!');
+}
+
+function soundMaker(value) {
+    if (value == 1) {
+        var audio = new Audio('src/sounds/damage.mp3');
+        audio.play();
+    }
+    else if (value == 2) {
+        var audio = new Audio('src/sounds/gameOver.mp3');
+        audio.play();
+    }
+    else if (value == 3) {
+        var audio = new Audio('src/sounds/rightAnswer.mp3');
+        audio.play();
+    }
+    else if (value == 4) {
+        var audio = new Audio('src/sounds/pick.mp3');
+        audio.play();
+    }
 }

@@ -45,6 +45,7 @@
                         var text;
                         globalThis.check = 0;
                         icon2.onclick = function () {
+                            soundMaker(4);
                             text = document.getElementsByClassName('questions')[0];
                             if(check == 0) {
                                 text.style.fontFamily = "Helvetica, sans-serif";

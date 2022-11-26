@@ -27,7 +27,7 @@ img {
 .map{
     height: 260px;
     width: 300%;
-    background: url("src/imgs/backgroundCity.png") repeat-x;
+    background: url("src/imgs/backgroundCityFin.png") repeat-x;
     background-size: contain;
     margin-bottom: 20px;
     border-radius: 7px;
