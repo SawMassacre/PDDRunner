@@ -12,15 +12,28 @@ var correct_answer = 0
 var correct_count=0
 var wrong_count=0
 var count = 0;
+var rage_mode = 0;
+var play = document.getElementById("but");
+
 
 function AnswerCheck(button_index){
     if (button_index==correct_answer){
+        soundMaker(3);
         correct_count++
-
+        rage_mode++;
     }
     else{
         wrong_count++
+        takeDamage();
+        rage_mode = 0;
     }
+    if(rage_mode == 5){
+        Heal();
+        rage_mode = 0;
+    }
+    document.getElementById('wins').textContent = correct_count;
+    document.getElementById('loses').textContent = wrong_count;
+    document.getElementById('rage_mode').textContent = rage_mode + "/5";
     GetQuestion();
 }
 
@@ -43,7 +56,9 @@ function PutQuestions(){
     document.getElementById('answer3').textContent = answer3;
     document.getElementById('answer4').textContent = answer4;
 }
+
 function GetQuestion(){
+    refreshTimer();
     Random();
     if(memory_arr.includes(rand) == false){
         memory_arr.push(rand);
@@ -67,14 +82,32 @@ function GetData(){
 }
 
 function Play(){
-
+    startTimer();
+    songtwo.play();
     GetData();
     GetQuestion();
+        document.getElementById('but').style.display = 'none';
     document.getElementById('hide').style.display = 'block';
-    document.getElementById('but').style.display = 'none';
-
 }
 
+function Restart(){
+    document.getElementById('map').style.filter = "blur(0px)";
+    document.getElementById('health_bar').style.filter = "blur(0px)";
+    document.getElementById('image').style.filter = "blur(0px)";
+    document.getElementById('hide2').style.display = 'block';
+    document.getElementById('but2').style.display = 'none'
+    document.getElementById('game_over').style.display = 'none'
+    memory_arr = new Array()
+    wrong_count=0
+    correct_count = 0
+    wrong_count = 0
+    rage_mode = 0
+    document.getElementById('wins').textContent = correct_count;
+    document.getElementById('loses').textContent = wrong_count;
+    document.getElementById('rage_mode').textContent = rage_mode;
+    damage = 0
+    damageAnimation();
+}
 
 
 var tID; //we will use this variable to clear the setInterval()
@@ -119,53 +152,104 @@ function carHopOnStart() {
 }
 
 let damage = 0;
+let damage0 = 800;
 let damage1 = 550;
 let damage2 = 300;
 
-function takeDamage() {
+function Heal(){
+    if (damage >= 0) {
+        damage -= 1;
+    }
     damageAnimation();
-    if (damage == 2) {
+    soundMaker(5);
+}
+
+function takeDamage() {
+    soundMaker(1);
+    damage += 1;
+    damageAnimation();
+    if (damage == 3) {
         gameOver();
     }
-    damage += 1;
 }
 
 function damageAnimation() {
-    if (damage == 0) {
-        soundMaker(1);
-        document.getElementById('image').style.left = damage1 + 'px';
+    if(damage == 0){
+        document.getElementById('image').style.left = damage0 + 'px';
+        document.getElementById('image').style.background = "url('src/imgs/carGif.gif')";
+        document.getElementById('image').style.backgroundSize = "cover";
+        document.getElementById('image').style.filter = "drop-shadow(0px -15px 20px rgb(107, 7, 194)) brightness(60%) blur(0)";
+        document.getElementById('health1').src = '/src/imgs/health.png';
+        document.getElementById('health2').src = '/src/imgs/health.png';
+        document.getElementById('health3').src = '/src/imgs/health.png';
+    }
+    else if (damage == 1) {
+        document.getElementById('image').style.left = damage1 + 'px'
         document.getElementById('image').style.background = "url('src/imgs/carGifDamagedOnce.gif')";
         document.getElementById('image').style.backgroundSize = "cover";
         document.getElementById('image').style.filter = "invert(10%) drop-shadow(0px -15px 20px rgb(255, 165, 40))";
-    } else if (damage == 1) {
-        soundMaker(1);
+        document.getElementById('health1').src = '/src/imgs/health.png';
+        document.getElementById('health2').src = '/src/imgs/health.png';
+        document.getElementById('health3').src = '/src/imgs/empty_health.png';
+    } else if (damage == 2) {
         document.getElementById('image').style.left = damage2 + 'px';
         document.getElementById('image').style.background = "url('src/imgs/carGifDamagedTwice.gif')";
         document.getElementById('image').style.backgroundSize = "cover";
         document.getElementById('image').style.filter = "invert(15%) drop-shadow(0px -15px 20px rgb(138, 3, 3))";
+        document.getElementById('health1').src = '/src/imgs/health.png';
+        document.getElementById('health2').src = '/src/imgs/empty_health.png';
+        document.getElementById('health3').src = '/src/imgs/empty_health.png';
     }
 }
 
 function gameOver() {
     soundMaker(2);
-    alert('game over! study harder!');
+    document.getElementById('map').style.filter = "blur(5px)";
+    document.getElementById('health_bar').style.filter = "blur(5px)";
+    document.getElementById('image').style.filter = "blur(5px)";
+    document.getElementById('hide2').style.display = 'none';
+    document.getElementById('but2').style.display = 'block';
+    document.getElementById('game_over').style.display = 'block';
+    timer = 1000000;
 }
 
 function soundMaker(value) {
     if (value == 1) {
         var audio = new Audio('src/sounds/damage.mp3');
-        audio.play();
     }
     else if (value == 2) {
         var audio = new Audio('src/sounds/gameOver.mp3');
-        audio.play();
     }
     else if (value == 3) {
         var audio = new Audio('src/sounds/rightAnswer.mp3');
-        audio.play();
     }
     else if (value == 4) {
         var audio = new Audio('src/sounds/pick.mp3');
-        audio.play();
     }
+    else if (value == 5) {
+        var audio = new Audio('src/sounds/heal.mp3');
+    }
+    audio.play();
+}
+
+let defaultTimer = 120;
+let timer;
+timer = defaultTimer;
+
+function startTimer() {
+    setInterval(function() {
+        document.getElementById('countdown').textContent = timer + "сек";
+        if (timer != 1) {
+            timer = timer - 1;
+        }
+        else if (timer == 1) {
+            takeDamage();
+            GetQuestion();
+            refreshTimer();
+        }
+    }, 1500);
+}
+
+function refreshTimer() {
+    timer = defaultTimer;
 }

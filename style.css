@@ -1,14 +1,61 @@
+@font-face {
+    font-family: Pyxel-Cyr-Normal;
+    src: url(/src/fonts/pixelcyr_normal.ttf);
+}
+
 *{
     margin: 0;
     padding: 0;
 }
 
 .but{
-    width: 200px;
+    width: 400px;
     height: 200px;
     margin: 200px auto;
-    background-color: white;
+    background-image: url('/src/imgs/start.png');
+    background-size: cover;
+    cursor: pointer;
+    animation: pulse 2s infinite;
 }
+
+.but2{
+    width: 400px;
+    height: 200px;
+    margin: 100px auto;
+    background-image: url('/src/imgs/start.png');
+    background-size: cover;
+    cursor: pointer;
+    animation: pulse 2s infinite;
+}
+
+.game_over{
+    width: 600px;
+    height: 200px;
+    top: -50px;
+    left: 30%;
+    position: absolute;
+    z-index: 10;
+    animation: pulse 5s infinite;
+    -webkit-filter: drop-shadow(0px 5px 10px rgb(140, 58, 240));
+    filter        : drop-shadow(0px 5px 10px rgb(80, 70, 226));
+}
+
+@keyframes pulse {
+    0% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  
+    70% {
+      transform: scale(1.2);
+      box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+  
+    100% {
+      transform: scale(0.95);
+      box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+  }
 
 img {
     max-width:100%;
@@ -37,19 +84,34 @@ img {
     z-index: -1;
 }
 
+.health_bar{
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    z-index: 10;
+    -webkit-filter: drop-shadow(0px 5px 15px rgb(202, 20, 153));
+    filter        : drop-shadow(0px 5px 15px rgb(195, 13, 205));
+}
+
+.health{
+    display: inline-block;
+    width: 50px;
+}
+
 .container{
     width: 1400px;
     padding: 0 30px;
 }
 
 .questions{
+    font-family: Pyxel-Cyr-Normal;
     border-radius: 7px;
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
     -webkit-filter: drop-shadow(0px 5px 10px rgb(29, 7, 55));
     filter        : drop-shadow(0px 5px 10px rgb(27, 4, 63));
-    font-family: 'Pixel Cyr Normal', arial;
+    /*font-family: 'Cyrillic Pixel-7', arial;*/
     color: white;
     text-align: center;
     font-size: 18px;
@@ -76,6 +138,16 @@ img {
     background-image: url('src/imgs/optionBgReversed.png');
     background-size:cover;
     filter: blur(0px);
+}
+.statistic{
+    margin-top: 20px;
+    text-align: center;
+    height: 40px;
+    color: white;
+}
+.statistic_text{
+    text-align: center;
+    height: 20px;
 }
 
 .questionbox , .answers{
@@ -218,4 +290,16 @@ body {
 
 #q_img {
     border-radius: 4px;
+}
+
+#playingNow {
+    opacity: 0%;
+}
+
+.countdown {
+    color: red;
+    -webkit-filter: drop-shadow(0px 5px 10px rgb(255, 38, 0));
+    filter        : drop-shadow(0px 5px 10px rgb(255, 38, 0));
+    text-shadow:1px 1px 10px rgb(255, 0, 0), 1px 1px 7px rgb(235, 4, 4);
+    z-index: 10;
 }
